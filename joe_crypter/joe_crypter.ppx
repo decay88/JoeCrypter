@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings version="1.0">
+	<category name="joecrypt_injecter.h">
+		<category name="Window">
+			<property name="Left" type="integer">128</property>
+			<property name="Top" type="integer">128</property>
+			<property name="Right" type="integer">1193</property>
+			<property name="Bottom" type="integer">677</property>
+			<property name="Maximized" type="integer">0</property>
+			<property name="Active" type="integer">0</property>
+		</category>
+	</category>
+	<category name="joe_crypter.c">
+		<category name="Window">
+			<property name="Left" type="integer">-9</property>
+			<property name="Top" type="integer">-38</property>
+			<property name="Right" type="integer">1425</property>
+			<property name="Bottom" type="integer">735</property>
+			<property name="Maximized" type="integer">1</property>
+			<property name="Active" type="integer">1</property>
+		</category>
+	</category>
+	<category name="base64.h" />
+	<category name="payload.h" />
+	<category name="payload.rc" />
+	<category name="joe_crypter.exe" />
+</settings>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings version="1.0">
+	<category name="Application">
+		<property name="AppWindow" type="string">1911 -9 3849 1089 1</property>
+		<property name="AppFont" type="string">Courier New,8,0</property>
+		<property name="OnStartup" type="integer">1</property>
+		<property name="ShowSplashScreen" type="integer">0</property>
+		<property name="Toolbar" type="integer">1</property>
+		<property name="Statusbar" type="integer">1</property>
+		<property name="DocumentTabs" type="integer">1</property>
+		<property name="DocumentTabsCloseButton" type="integer">1</property>
+		<property name="FullScreen" type="integer">0</property>
+		<property name="LargeToolbarIcons" type="integer">0</property>
+		<property name="TabHeight" type="integer">200</property>
+		<property name="DebugTabWidth" type="integer">920</property>
+		<property name="ShowPath" type="integer">0</property>
+		<property name="FastClassifyFile" type="integer">0</property>
+		<property name="AutoReload" type="integer">0</property>
+		<property name="MaxFileSize" type="integer">1073741824</property>
+		<property name="FastLoadProject" type="integer">1</property>
+		<property name="AutoSelectNewProject" type="integer">1</property>
+		<property name="NoSavePromptBeforeBuild" type="integer">1</property>
+		<property name="SortProjectFuncs" type="integer">1</property>
+		<property name="MakeUniqueZIPNames" type="integer">0</property>
+		<property name="ProjPaneLeft" type="integer">0</property>
+		<property name="ProjPaneWidth" type="integer">495</property>
+		<property name="BrowseInfoLevel" type="integer">2</property>
+		<property name="NewProjectView" type="integer">1</property>
+		<property name="ProjectEncoding" type="integer">2</property>
+		<property name="FileSpecZip" type="string"></property>
+		<property name="ShowWhitespace" type="integer">0</property>
+		<property name="ShowLinebreaks" type="integer">0</property>
+		<property name="ShowLinenumbers" type="integer">0</property>
+		<property name="ShowFoldings" type="integer">1</property>
+		<property name="ShowMatchingBraces" type="integer">1</property>
+		<property name="ShowCallTips" type="integer">1</property>
+		<property name="ShowMemberList" type="integer">1</property>
+		<property name="MemberListDelay" type="integer">500</property>
+		<property name="ShowIncludeList" type="integer">1</property>
+		<property name="DragAndDrop" type="integer">0</property>
+		<property name="AcceptCtrlChars" type="integer">0</property>
+		<property name="WrapFindQuery" type="integer">0</property>
+		<property name="MakeBackup" type="integer">1</property>
+		<property name="SourceEncoding" type="integer">1</property>
+		<property name="SpaceTabs" type="integer">0</property>
+		<property name="TabSize" type="integer">4</property>
+		<property name="IndentSize" type="integer">4</property>
+		<property name="IndentMode" type="integer">2</property>
+		<property name="CStyle" type="integer">1</property>
+		<property name="FindWholeWord" type="integer">0</property>
+		<property name="FindMatchCase" type="integer">0</property>
+		<property name="FindSubdirectories" type="integer">1</property>
+		<property name="FindFileSpec" type="string"></property>
+		<property name="SortResourceNames" type="integer">1</property>
+		<property name="MakeUniqueResourceIdents" type="integer">0</property>
+		<property name="ResourceEncoding" type="integer">1</property>
+		<property name="DeepScan" type="integer">0</property>
+		<property name="FileSpecLeft" type="string"></property>
+		<property name="FileSpecRight" type="string"></property>
+		<property name="HomePage" type="string">ms-its:C:\Program Files\PellesC\Bin\Help\help0009.chm::/html/eng/titlepage.htm</property>
+	</category>
+	<category name="Dialog Editor">
+		<property name="PropertiesWindow" type="string">78 50 278 350 0</property>
+		<property name="GridWidth" type="integer">4</property>
+		<property name="GridHeight" type="integer">4</property>
+		<property name="HorzMargin" type="integer">8</property>
+		<property name="VertMargin" type="integer">8</property>
+		<property name="HorzControlSpacing" type="integer">8</property>
+		<property name="VertControlSpacing" type="integer">8</property>
+		<property name="HorzButtonSpacing" type="integer">8</property>
+		<property name="VertButtonSpacing" type="integer">8</property>
+		<property name="Grid" type="integer">1</property>
+		<property name="PropertyDescription" type="integer">0</property>
+		<property name="SortProperties" type="integer">0</property>
+		<property name="SortObjectNames" type="integer">0</property>
+		<property name="ShowRawStyles" type="integer">0</property>
+	</category>
+	<category name="Graphics Editor">
+		<property name="ToolbarWindow" type="string">78 50 184 438 0</property>
+		<property name="PixelGrid" type="integer">1</property>
+		<property name="Grid" type="integer">1</property>
+		<property name="GridWidth" type="integer">16</property>
+		<property name="GridHeight" type="integer">16</property>
+		<property name="JpegQuality" type="integer">75</property>
+		<property name="PngCompression" type="integer">9</property>
+		<property name="UseDither" type="integer">1</property>
+	</category>
+	<category name="Colors">
+		<property name="Text_FG" type="integer">32768</property>
+		<property name="Text_BG" type="integer">16777215</property>
+		<property name="Seltext_FG" type="integer">16777215</property>
+		<property name="Seltext_BG" type="integer">0</property>
+		<property name="Keyword_FG" type="integer">16711680</property>
+		<property name="Keyword_BG" type="integer">16777215</property>
+		<property name="Comment_FG" type="integer">32768</property>
+		<property name="Comment_BG" type="integer">16777215</property>
+		<property name="Number_FG" type="integer">16711935</property>
+		<property name="Number_BG" type="integer">16777215</property>
+		<property name="String_FG" type="integer">8388736</property>
+		<property name="String_BG" type="integer">16777215</property>
+		<property name="Preproc_FG" type="integer">128</property>
+		<property name="Preproc_BG" type="integer">16777215</property>
+		<property name="Function_FG" type="integer">8421376</property>
+		<property name="Function_BG" type="integer">16777215</property>
+		<property name="Operator_FG" type="integer">16711680</property>
+		<property name="Operator_BG" type="integer">16777215</property>
+		<property name="Breakpoint_FG" type="integer">0</property>
+		<property name="Breakpoint_BG" type="integer">12648447</property>
+		<property name="Debugline_FG" type="integer">0</property>
+		<property name="Debugline_BG" type="integer">12632319</property>
+		<property name="Profline_FG" type="integer">0</property>
+		<property name="Profline_BG" type="integer">11394815</property>
+		<property name="DiffFile_FG" type="integer">0</property>
+		<property name="DiffFile_BG" type="integer">11394815</property>
+		<property name="DiffLeft_FG" type="integer">0</property>
+		<property name="DiffLeft_BG" type="integer">11394815</property>
+		<property name="DiffRight_FG" type="integer">0</property>
+		<property name="DiffRight_BG" type="integer">12632319</property>
+	</category>
+	<category name="Directories">
+		<property name="PathDirs" type="string">C:\Program Files\PellesC\Bin</property>
+		<property name="LibraryDirs" type="string">C:\Program Files\PellesC\Lib;C:\Program Files\PellesC\Lib\Win64;C:\Program Files\PellesC\Lib\Win</property>
+		<property name="IncludeDirs" type="string">C:\Program Files\PellesC\Include;C:\Program Files\PellesC\Include\Win;C:\Program Files\PellesC\Include\Win\gl</property>
+		<property name="ProjectDir" type="string">G:\C Projects</property>
+	</category>
+	<category name="Page Setup">
+		<property name="MarginLeft" type="integer">10</property>
+		<property name="MarginTop" type="integer">10</property>
+		<property name="MarginRight" type="integer">10</property>
+		<property name="MarginBottom" type="integer">10</property>
+	</category>
+	
+	<category name="Recent URL List">
+		<property name="Url0" type="string">http://www.smorgasbordet.com/pellesc/</property>
+		<property name="Url1" type="string">http://forum.pellesc.de/</property>
+	</category>
+	<category name="Custom Tools">
+		<category name="Tool0">
+			<property name="Text" type="string">Registry Editor</property>
+			<property name="Command" type="string">C:\Program Files\PellesC\Bin\POReg64.exe</property>
+			<property name="Arguments" type="string"></property>
+			<property name="InitialDir" type="string"></property>
+			<property name="CaptureOutput" type="integer">0</property>
+		</category>
+		<category name="Tool1">
+			<property name="Text" type="string">Process Viewer</property>
+			<property name="Command" type="string">C:\Program Files\PellesC\Bin\POViewP64.exe</property>
+			<property name="Arguments" type="string"></property>
+			<property name="InitialDir" type="string"></property>
+			<property name="CaptureOutput" type="integer">0</property>
+		</category>
+	</category>
+	<category name="Debugger">
+		<property name="HexValues" type="integer">1</property>
+		<property name="CheckSourceTime" type="integer">1</property>
+		<property name="FlagsDialog" type="integer">1</property>
+		<property name="BreakOnEntry" type="integer">0</property>
+		<property name="AllModules" type="integer">1</property>
+		<property name="MaxArrayElems" type="integer">100</property>
+		<property name="TraceMessages" type="integer">0</property>
+		<property name="MemoryView" type="integer">1</property>
+		<property name="RegisterViewX86" type="integer">63</property>
+		<property name="ProfileTimeout" type="integer">100</property>
+		<property name="ProfileMode" type="integer">0</property>
+	</category>
+</settings>

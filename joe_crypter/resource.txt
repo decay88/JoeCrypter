@@ -1,0 +1,150 @@
+Command Line Scripting:
+
+All the functionality of Resource Hacker™ can be accessed from the command line (apart from viewing resources) without having to open the Resource Hacker™ GUI.
+Command line scripting can remove the drudgery entailed with repeating Resource Hacker™ tasks.
+
+Command line syntax has 2 forms:
+
+    Single commands: ResourceHacker.exe command command_parameters
+    Multiple commands: ResourceHacker.exe -script multi_command_file (note that -script is very different to the -compile command, see below) 
+
+Single Commands:
+command and command_parameters:
+-compile 	resource_script.rc
+-add 	ExeFile, SaveAsFile, ResourceFile, ResourceMask
+-addskip 	ExeFile, SaveAsFile, ResourceFile, ResourceMask
+-addoverwrite 	ExeFile, SaveAsFile, ResourceFile, ResourceMask
+-modify 	ExeFile, SaveAsFile, ResourceFile, ResourceMask
+-extract 	ExeFile, ResourceFile, ResourceMask
+-delete 	ExeFile, SaveAsFile, ResourceMask
+Notes:
+Each command parameter must be separated by a comma, but no comma is expected before the first parameter.
+Paths should be included with filenames.
+Filenames containing spaces should be enclosed within double quotes.
+
+The ResourceMask enables a command to be performed on either single or multiple resource items. It takes the form ResType,ResName,ResLang. (If ResType is a predefined type, then either its number or identifier can be used —e.g. the ResourceMask dialog,128,0 is identical to 5,128,0.) Any or all of the ResourceMask items can be omitted —e.g. dialog,, indicates that all dialogs are to be applied to the command irrespective of name or language, and ,,1049 indicates that all resources with Russian (1049) as the languageID will be applied to the command. An empty ResourceMask ,, indicates that the command will be applied to every resource irrespective of type, name or language.
+
+When adding or modifying items, the ResourceFile can be a RES file for any item type, a BMP file for BITMAP types, a CUR file for CURSORGROUP types, an ICO file for ICONGROUP types, and any file type for RCDATA and user defined resource types.
+
+When adding and modifying resources from files other than RES files then both ResType and ResName must be specified in the ResourceMask. If ResLang is omitted then the command applies to the first language item with matching type and name, otherwise, if no matching item exists then language neutral (0) is assumed.
+
+When extracting resources, and more than one item is implied by the ResourceMask, then the specified ResourceFile must be either a RES file or an RC file. When binary image resources are extracted to RC files, each image is also created as a separate binary (ICO, CUR, BMP, GIF, BIN) file. See the example below.
+
+ICON and CURSOR resources cannot be manipulated directly but are added, deleted, modified and extracted by using their respective ICONGROUP or CURSORGROUP. ICON and CURSOR can still be used but Resource Hacker™ will assume ICONGROUP or CURSORGROUP was intended.
+
+All actions or errors are logged to “ResourceHacker.log”.
+
+NB: If a script does not produce the desired results then check the log!
+
+Examples: (File paths have been omitted for clarity)
+
+To compile a resource script (from *.rc to *.res)
+ResourceHacker.exe -compile my_resources.rc
+
+To add or update dialog name:maindlg lang:0 in MyProg.exe from UpdDlg.res
+ResourceHacker.exe -addoverwrite MyProg.exe, MyProgNew.exe, UpdDlg.res, dialog,maindlg,0
+
+To add or update bitmap name:128 in MyProg.exe from NewImage.bmp
+ResourceHacker.exe -addoverwrite MyProg.exe, MyProgNew.exe, NewImage.bmp , bitmap,128,
+
+To add or update all bitmaps in MyProg.exe from Images.res
+ResourceHacker.exe -addoverwrite MyProg.exe, MyProgNew.exe, Images.res, bitmap,,
+
+To add a “user-defined” binary resource (README,1,0) to MyProg.exe from ReadMe.html
+ResourceHacker.exe -addoverwrite MyProg.exe, MyProgNew.exe, ReadMe.html, readme,1,0
+
+To add all items in Images.res to MyProg.exe (but fail if any item already exists)
+ResourceHacker.exe -add MyProg.exe, MyProgNew.exe, Images.res ,,,
+
+To add all items in Images.res to MyProg.exe (skipping any existing items)
+ResourceHacker.exe -addskip MyProg.exe, MyProgNew.exe, Images.res ,,,
+
+To modify all items in MyProg.exe with the items in Images.res (ignoring any items in Images.res which do not exist in MyProg.exe)
+ResourceHacker.exe -modify MyProg.exe, MyProgNew.exe, Images.res , , ,
+
+To extract all icons from MyProg.exe to MyProgIcons.rc (creating MyProgIcons.rc, Icon_1.ico, Icon_2.ico , Icon_3.ico etc...)
+ResourceHacker.exe -extract MyProg.exe, MyProgIcons.rc, icongroup,,
+
+To delete GIF name:128 from MyProg.exe
+ResourceHacker.exe -delete MyProg.exe, MyProgNew.exe, gif,128,
+
+Multiple Commands:
+
+syntax: ResourceHacker.exe -script ScriptFile
+ScriptFile is a text file with the following layout:
+
+
+	 //comments are preceded by double slashes
+	 [FILENAMES]
+	 Exe=
+	 SaveAs=
+	 Log=
+	
+	 [COMMANDS]
+	 -add          ResourceSrc, ResourceMask
+	 -addskip      ResourceSrc, ResourceMask
+	 -addoverwrite ResourceSrc, ResourceMask
+	 -addoverwrite ResourceSrc, ResourceMask
+	 -modify       ResourceSrc, ResourceMask
+	 -extract      ResourceTgt, ResourceMask
+	 -delete       ResourceMask
+	
+
+
+If Log is omitted then the default log —ResourceHacker.log— will be used.
+NB: If a script does not produce the desired results then check the log!
+Examples:
+
+
+	
+	 rh_script_myprog_rus.txt -
+	
+	 //This script deletes all Language Neutral (0)
+	 //string-table, menu and dialog resource items
+	 //in MyProg.exe before replacing them
+	 //with Russian (1049) items...
+	
+	 [FILENAMES]
+	 Exe=    MyProg.exe
+	 SaveAs= MyProg_Rus.exe
+	 Log=    MyProg_Rus.log
+	
+	 [COMMANDS]
+	 -delete  MENU,,0
+	 -delete  DIALOG,,0
+	 -delete  STRINGTABLE,,0
+	 -add     MyProg_Rus.res, MENU,,1049
+	 -add     MyProg_Rus.res, DIALOG,,1049
+	 -add     MyProg_Rus.res, STRINGTABLE,,1049
+	
+	
+	rh_script_myprog_upd_images.txt -
+	
+	 //This script updates 2 bitmaps and an
+	 //icon in MyProg.exe ...
+	
+	 [FILENAMES]
+	 Exe=    MyProg.exe
+	 SaveAs= MyProg_Updated.exe
+	
+	 [COMMANDS]
+	 -addoverwrite Bitmap128.bmp, BITMAP,128,
+	 -addoverwrite Bitmap129.bmp, BITMAP,129,0
+	 -addoverwrite MainIcon.ico, ICONGROUP,MAINICON,0
+	
+	
+	rh_script_myprog_upd_all.txt -
+	
+	 //This script replaces all resources
+	 //in MyProg.exe with all the resources
+	 //in MyProgNew.res
+	
+	 [FILENAMES]
+	 Exe=    MyProg.exe
+	 SaveAs= MyProg_Updated.exe
+	
+	 [COMMANDS]
+	 -delete  ,,,            //delete all resources before...
+	 -add MyProgNew.res ,,,  //adding all the new resources	 
+	
+

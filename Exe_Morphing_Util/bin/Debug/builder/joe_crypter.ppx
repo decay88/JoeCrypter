@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings version="1.0">
+	<category name="joecrypt_injecter.h" />
+	<category name="joe_crypter.c" />
+	<category name="base64.h" />
+	<category name="payload.h" />
+	<category name="payload.rc" />
+	<category name="joe_crypter.exe" />
+</settings>
