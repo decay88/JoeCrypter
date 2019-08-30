@@ -56,8 +56,10 @@
             this.dtp = new System.Windows.Forms.DateTimePicker();
             this.cbRegionSpecific = new System.Windows.Forms.CheckBox();
             this.cbDateSpecific = new System.Windows.Forms.CheckBox();
+            this.cbCores = new System.Windows.Forms.CheckBox();
             this.cbAntiEmu = new System.Windows.Forms.CheckBox();
             this.cbFakeWindows = new System.Windows.Forms.CheckBox();
+            this.cbSpecialStall = new System.Windows.Forms.CheckBox();
             this.cbLongStall = new System.Windows.Forms.CheckBox();
             this.cbAntiVM = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -81,8 +83,6 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.rbUnpackMeth1 = new System.Windows.Forms.RadioButton();
             this.rbUnpackMeth2 = new System.Windows.Forms.RadioButton();
-            this.cbCores = new System.Windows.Forms.CheckBox();
-            this.cbSpecialStall = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -409,6 +409,16 @@
             this.cbDateSpecific.Text = "Date Specific";
             this.cbDateSpecific.UseVisualStyleBackColor = true;
             // 
+            // cbCores
+            // 
+            this.cbCores.AutoSize = true;
+            this.cbCores.Location = new System.Drawing.Point(197, 23);
+            this.cbCores.Name = "cbCores";
+            this.cbCores.Size = new System.Drawing.Size(87, 17);
+            this.cbCores.TabIndex = 3;
+            this.cbCores.Text = "Check Cores";
+            this.cbCores.UseVisualStyleBackColor = true;
+            // 
             // cbAntiEmu
             // 
             this.cbAntiEmu.AutoSize = true;
@@ -428,6 +438,16 @@
             this.cbFakeWindows.TabIndex = 3;
             this.cbFakeWindows.Text = "Fake Windows";
             this.cbFakeWindows.UseVisualStyleBackColor = true;
+            // 
+            // cbSpecialStall
+            // 
+            this.cbSpecialStall.AutoSize = true;
+            this.cbSpecialStall.Location = new System.Drawing.Point(197, 93);
+            this.cbSpecialStall.Name = "cbSpecialStall";
+            this.cbSpecialStall.Size = new System.Drawing.Size(84, 17);
+            this.cbSpecialStall.TabIndex = 3;
+            this.cbSpecialStall.Text = "Special Stall";
+            this.cbSpecialStall.UseVisualStyleBackColor = true;
             // 
             // cbLongStall
             // 
@@ -555,14 +575,14 @@
             // loadExeToolStripMenuItem
             // 
             this.loadExeToolStripMenuItem.Name = "loadExeToolStripMenuItem";
-            this.loadExeToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.loadExeToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.loadExeToolStripMenuItem.Text = "Load Exe";
             this.loadExeToolStripMenuItem.Click += new System.EventHandler(this.loadExeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -579,20 +599,20 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // seriouslyHelpToolStripMenuItem
             // 
             this.seriouslyHelpToolStripMenuItem.Name = "seriouslyHelpToolStripMenuItem";
-            this.seriouslyHelpToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.seriouslyHelpToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.seriouslyHelpToolStripMenuItem.Text = "Seriously help!";
             // 
             // turnOffMusicToolStripMenuItem
             // 
             this.turnOffMusicToolStripMenuItem.Name = "turnOffMusicToolStripMenuItem";
-            this.turnOffMusicToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.turnOffMusicToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.turnOffMusicToolStripMenuItem.Text = "Turn Off Music";
             this.turnOffMusicToolStripMenuItem.Click += new System.EventHandler(this.turnOffMusicToolStripMenuItem_Click);
             // 
@@ -615,6 +635,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
+            this.radioButton2.Enabled = false;
             this.radioButton2.Location = new System.Drawing.Point(100, 39);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton2.Name = "radioButton2";
@@ -627,6 +648,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
+            this.radioButton3.Enabled = false;
             this.radioButton3.Location = new System.Drawing.Point(190, 17);
             this.radioButton3.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton3.Name = "radioButton3";
@@ -639,6 +661,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Enabled = false;
             this.radioButton1.Location = new System.Drawing.Point(4, 39);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton1.Name = "radioButton1";
@@ -663,6 +686,7 @@
             // rbUnpackMeth2
             // 
             this.rbUnpackMeth2.AutoSize = true;
+            this.rbUnpackMeth2.Enabled = false;
             this.rbUnpackMeth2.Location = new System.Drawing.Point(100, 17);
             this.rbUnpackMeth2.Margin = new System.Windows.Forms.Padding(2);
             this.rbUnpackMeth2.Name = "rbUnpackMeth2";
@@ -671,26 +695,6 @@
             this.rbUnpackMeth2.TabStop = true;
             this.rbUnpackMeth2.Text = "Transactional";
             this.rbUnpackMeth2.UseVisualStyleBackColor = true;
-            // 
-            // cbCores
-            // 
-            this.cbCores.AutoSize = true;
-            this.cbCores.Location = new System.Drawing.Point(197, 23);
-            this.cbCores.Name = "cbCores";
-            this.cbCores.Size = new System.Drawing.Size(87, 17);
-            this.cbCores.TabIndex = 3;
-            this.cbCores.Text = "Check Cores";
-            this.cbCores.UseVisualStyleBackColor = true;
-            // 
-            // cbSpecialStall
-            // 
-            this.cbSpecialStall.AutoSize = true;
-            this.cbSpecialStall.Location = new System.Drawing.Point(197, 93);
-            this.cbSpecialStall.Name = "cbSpecialStall";
-            this.cbSpecialStall.Size = new System.Drawing.Size(84, 17);
-            this.cbSpecialStall.TabIndex = 3;
-            this.cbSpecialStall.Text = "Special Stall";
-            this.cbSpecialStall.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 

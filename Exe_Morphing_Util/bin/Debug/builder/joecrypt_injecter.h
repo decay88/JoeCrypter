@@ -4,7 +4,7 @@
 
 typedef LONG (WINAPI *LP_NtUnmapViewOfSection)(HANDLE ProcessHandle,
     DWORD BaseAddress);
-int ExecFile(const char *pszFilePath, char *lpFile)
+int ExecFile(const char *pszFilePath, byte *lpFile)
 {
 
     DWORD dwBytes; void *lpImageBase = NULL;
