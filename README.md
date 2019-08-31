@@ -5,7 +5,7 @@ Here is how it works:
 
 The minor mudging of exe code is done to the header to confuse analysts. Modified section names, time stamps, exports, etc is all done in .NET
 
-The meat / potatoes is done in the 'joe_crypter' folder which has the C / assembly code. Here is where the trickery happens. I'm using Pelles C compiler (included inside) to work with my barebones.c file. Different 'tricks' are added to the file and the packaged exe is placed inside the resources section as a binary blob. We use the C compiler to cram the exe inside. If the conditions are met (say a 5 min stall using weird timing API's and a 200mb allocation, vm checks) then the exe runs via classic Run PE methods (hollowed out notepad.exe spawned, exe copied inside, process set running). If not satisfied, then the thing simply exits. 
+The meat / potatoes is done in the 'joe_crypter' folder which has the C / assembly code. Here is where the trickery happens. I'm using Pelles C compiler (included inside) to work with my barebones.c file. Different 'tricks' are added to the file and the packaged exe is placed inside the resources section as a binary blob. 'payload.rc' points to our encrypted payload and the decryption key is inside the program. We use the C compiler to cram the exe inside. If the conditions are met (say a 5 min stall using weird timing API's and a 200mb allocation, vm checks) then the exe runs via classic Run PE methods (hollowed out notepad.exe spawned, exe copied inside, process set running). If not satisfied, then the thing simply exits. 
 
 Over the years, other injection methods have been found. Transactional files, via APC's, CreateSection, and that control break thing with the console handler. I've tried to add others, but lack of interest keeps me from adding more / finishing.
 
@@ -15,7 +15,11 @@ The interesting things added lately are Region and Date checks. My idea was make
 
 Things to be done still:
 
-* Use rc4 encryption on the payload stored in the resources section (half done)
-* Implement other injection techniques like from this pro h4x0r https://modexp.wordpress.com/2019/06/15/4083/
+* Use encryption on the payload stored in the resources section - done
+* Implement other injection techniques like from this pro h4x0r https://modexp.wordpress.com/2019/06/15/4083/ - in progress
+* Add better music - done
+* Redesign UI - done
+* Make the encryption brute force itself maybe
+* Mimic ransomware behavior
 
 
