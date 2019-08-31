@@ -76,7 +76,6 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seriouslyHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.turnOffMusicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -93,22 +92,22 @@
             // 
             // btnMorph
             // 
-            this.btnMorph.Location = new System.Drawing.Point(226, 531);
+            this.btnMorph.Location = new System.Drawing.Point(10, 528);
             this.btnMorph.Name = "btnMorph";
-            this.btnMorph.Size = new System.Drawing.Size(81, 23);
+            this.btnMorph.Size = new System.Drawing.Size(304, 23);
             this.btnMorph.TabIndex = 2;
-            this.btnMorph.Text = "Morph Exe";
+            this.btnMorph.Text = "Make Changes";
             this.btnMorph.UseVisualStyleBackColor = true;
             this.btnMorph.Click += new System.EventHandler(this.btnMorph_Click);
             // 
             // tbfilehere
             // 
             this.tbfilehere.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbfilehere.Location = new System.Drawing.Point(4, 216);
+            this.tbfilehere.Location = new System.Drawing.Point(10, 216);
             this.tbfilehere.Name = "tbfilehere";
             this.tbfilehere.ReadOnly = true;
             this.tbfilehere.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbfilehere.Size = new System.Drawing.Size(606, 24);
+            this.tbfilehere.Size = new System.Drawing.Size(600, 24);
             this.tbfilehere.TabIndex = 1;
             // 
             // pictureBox1
@@ -590,8 +589,7 @@
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
-            this.seriouslyHelpToolStripMenuItem,
-            this.turnOffMusicToolStripMenuItem});
+            this.seriouslyHelpToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
@@ -599,22 +597,16 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // seriouslyHelpToolStripMenuItem
             // 
             this.seriouslyHelpToolStripMenuItem.Name = "seriouslyHelpToolStripMenuItem";
-            this.seriouslyHelpToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.seriouslyHelpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.seriouslyHelpToolStripMenuItem.Text = "Seriously help!";
-            // 
-            // turnOffMusicToolStripMenuItem
-            // 
-            this.turnOffMusicToolStripMenuItem.Name = "turnOffMusicToolStripMenuItem";
-            this.turnOffMusicToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.turnOffMusicToolStripMenuItem.Text = "Turn Off Music";
-            this.turnOffMusicToolStripMenuItem.Click += new System.EventHandler(this.turnOffMusicToolStripMenuItem_Click);
+            this.seriouslyHelpToolStripMenuItem.Click += new System.EventHandler(this.seriouslyHelpToolStripMenuItem_Click);
             // 
             // groupBox4
             // 
@@ -627,7 +619,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(283, 89);
+            this.groupBox4.Size = new System.Drawing.Size(283, 93);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Internal Unpacking Method";
@@ -700,7 +692,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 557);
+            this.ClientSize = new System.Drawing.Size(622, 563);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -712,7 +704,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mymenustrip;
             this.Name = "FormMain";
-            this.Text = "ITS MORPHIN TIME";
+            this.Text = "AV Testing Utility";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -777,7 +769,6 @@
         private System.Windows.Forms.CheckBox cbRegionSpecific;
         private System.Windows.Forms.CheckBox cbDateSpecific;
         private System.Windows.Forms.ComboBox cbRegion;
-        private System.Windows.Forms.ToolStripMenuItem turnOffMusicToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton rbUnpackMeth1;
         private System.Windows.Forms.RadioButton rbUnpackMeth2;

@@ -1124,7 +1124,7 @@ namespace Exe_Morphing_Util
             if (devmode == false)
             {
                 player.settings.setMode("loop", true);
-                player.URL = Application.StartupPath + "\\mmpr.mp3";
+                player.URL = Application.StartupPath + "\\tekilla_remix.mp3";
                 player.controls.play();
             }
             // CEXE - http://www.scottlu.com/Content/CExe.html
@@ -1225,6 +1225,10 @@ namespace Exe_Morphing_Util
             player.controls.stop();
            
         }
-       
+
+        private void seriouslyHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://gironsec.com/blog");
+        }
     }
 }
