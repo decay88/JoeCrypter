@@ -171,12 +171,12 @@ byte *GetPayload(void)
 
 void LongStall(void)
 {
-	DWORD ayylmao=timeGetTime() * 20;
+	DWORD somestupidvar=timeGetTime() * 20;
 	_asm
 	{
 	xor eax,eax
 	xor ecx,ecx
-	mov eax,ayylmao
+	mov eax,somestupidvar
 	mov ecx,0
 	testd:
 	fnop

